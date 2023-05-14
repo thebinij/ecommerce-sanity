@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getImageProps } from "@/lib/client";
+import { GetImageProps } from "@/lib/client";
 
 const Product = ({ product: { image, name, slug, price } }: any) => {
-  const imageProps = getImageProps(image && image[0]);
+  const imageProps = GetImageProps(image && image[0]);
   return (
     <div>
       <Link href={`/product/${slug.current}`}>

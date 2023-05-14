@@ -15,5 +15,5 @@ export const client = createClient({
   });
 
 
-export const getImageProps = (image:Image) => useNextSanityImage(client,image) as ImageProps | null;
+export const GetImageProps = (image:Image) => useNextSanityImage(client,image) as ImageProps | null;
 

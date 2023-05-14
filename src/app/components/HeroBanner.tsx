@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getImageProps } from "@/lib/client";
 
 const HeroBanner = ({
   heroBanner: {
@@ -14,8 +13,7 @@ const HeroBanner = ({
     desc,
   },
 }: any) => {
-    const imageProps = getImageProps(image && image[0]);
-    console.log(image)
+
   return (
     <div className="hero-banner-container">
       <div>

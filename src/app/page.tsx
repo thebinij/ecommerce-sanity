@@ -25,7 +25,7 @@ const Home = async() => {
 };
 
 
-export const fetchData= async () => {
+ const fetchData= async () => {
   const query = '*[_type == "product"]';
   const products: ProductType[] = await client.fetch(query,{ next: { revalidate: 3600 } });
 

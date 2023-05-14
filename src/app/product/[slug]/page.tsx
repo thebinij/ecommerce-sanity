@@ -18,7 +18,7 @@ const ProductDetails = async ({
   const { products, product } = await fetchProducts(slug);
   const { image, name, details, price } = product;
   const qty = 0;
-
+  
   return (
     <div>
       <div className="product-detail-container">
@@ -81,7 +81,7 @@ const ProductDetails = async ({
           <p className="price">${price}</p>
           <div className="quantity">
             <h3>Quantity:</h3>
-            <p className="quantity-desc flex justify-center items-center">
+            <p className="flex items-center justify-center quantity-desc">
               <span className="minus">
                 <AiOutlineMinus />
               </span>
@@ -102,7 +102,7 @@ const ProductDetails = async ({
         </div>
       </div>
 
-      <div className="maylike-products-wrapper mb-10">
+      <div className="mb-10 maylike-products-wrapper">
         <h2>You may also like</h2>
         <div className="marquee">
           <div className="maylike-products-container track">
@@ -116,7 +116,7 @@ const ProductDetails = async ({
   );
 };
 
-export const getStaticPaths = async () => {
+const getStaticPaths = async () => {
   const query = `*[_type == "product"] {
     slug {
       current
@@ -138,7 +138,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const fetchProducts = async (slug: string) => {
+ const fetchProducts = async (slug: string) => {
   const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
   const productsQuery = '*[_type == "product"]';
 
