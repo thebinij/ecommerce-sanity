@@ -14,4 +14,4 @@ RUN npm run build
 EXPOSE 4730
 
 # Start the application
-CMD ["npm", "start", "-p", "4730"]
+CMD ["npm", "start"]
