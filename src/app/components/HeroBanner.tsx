@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { urlForImage } from "../../sanity/sanity-utils";
+import { urlForImage } from "../../../sanity/sanity-utils";
 
 const HeroBanner = ({
   heroBanner: {

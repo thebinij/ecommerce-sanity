@@ -5,7 +5,7 @@ import {
   AiFillStar,
   AiOutlineStar,
 } from "react-icons/ai";
-import Product from "@/components/Product";
+import Product from "@/app/components/Product";
 import Image from "next/image";
 import {
   getProduct,

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { urlForImage } from "../../sanity/sanity-utils";
+import { urlForImage } from "../../../sanity/sanity-utils";
 
 const Product = ({ product: { image, name, slug, price } }: any) => {
   const imageProps =   urlForImage(image && image[0]);
