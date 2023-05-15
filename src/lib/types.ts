@@ -1,3 +1,4 @@
+import {PortableTextBlock} from 'sanity'
 export interface Image {
   _type: string;
   _key: string;
@@ -15,6 +16,14 @@ export interface ProductType {
   slug: { current: string, _type: string };
   price: number;
   details: string;
+}
+
+export interface PageType {
+  _id: string;
+  _createdAt:string;
+  title: string;
+  slug: { current: string, _type: string }
+  content : PortableTextBlock[];
 }
 
 export interface Banner {

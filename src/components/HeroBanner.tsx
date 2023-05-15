@@ -22,7 +22,7 @@ const HeroBanner = ({
         <p className="beats-solo">{smallText}</p>
         <h3>{midText}</h3>
         <h1>{largeText1}</h1>
-        <div style={{ maxWidth: "100%", height: "auto" }}>
+        <div >
           <Image
             src={
               imageProps
@@ -30,7 +30,7 @@ const HeroBanner = ({
                 : "https://cdn.sanity.io/images/djjgyefp/production/bbe69c7b31d3721ac2dcda06ea9f54d81cdb20e0-1171x781.jpg"
             }
             alt="image"
-            width={600}
+            width={200}
             height={200}
             className="hero-banner-image"
           />

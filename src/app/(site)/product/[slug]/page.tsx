@@ -11,7 +11,7 @@ import {
   getProduct,
   getProducts,
   urlForImage,
-} from "../../../../sanity/sanity-utils";
+} from "../../../../../sanity/sanity-utils";
 
 type Props = {
   params: { slug: string };

@@ -1,14 +1,13 @@
 import { Key } from "react";
 import Product from "@/components/Product";
-import HeroBanner from "@/components/HeroBanner";
-import { getBanners, getProducts } from "../../sanity/sanity-utils";
+import {  getProducts } from "../../../sanity/sanity-utils";
 
 const Home = async() => {
   const products = await getProducts()
-  const banner = await getBanners()
+
   return (
     <main>
-      <HeroBanner heroBanner={banner.length && banner[0]}  />
+      {/* <HeroBanner heroBanner={banner.length && banner[0]}  /> */}
 
       <div className="products-heading">
         <h2>Best Seller Products</h2>
