@@ -1,13 +1,14 @@
 import { Key } from "react";
-import { client } from "../lib/client";
-import Product from "@/app/components/Product";
-import { Banner, ProductType } from "@/lib/types";
+import Product from "@/components/Product";
+import HeroBanner from "@/components/HeroBanner";
+import { getBanners, getProducts } from "../../sanity/sanity-utils";
 
 const Home = async() => {
-  const {products } = await fetchData()
+  const products = await getProducts()
+  const banner = await getBanners()
   return (
     <main>
-      {/* <HeroBanner heroBanner={bannerData.length && bannerData[0]}  /> */}
+      <HeroBanner heroBanner={banner.length && banner[0]}  />
 
       <div className="products-heading">
         <h2>Best Seller Products</h2>
@@ -24,17 +25,6 @@ const Home = async() => {
   );
 };
 
-
- const fetchData= async () => {
-  const query = '*[_type == "product"]';
-  const products: ProductType[] = await client.fetch(query,{ next: { revalidate: 3600 } });
-
-  const bannerQuery = '*[_type == "banner"]';
-  const bannerData: Banner[] = await client.fetch(bannerQuery,{ next: { revalidate: 5000 } });
-
-  return {products, bannerData }
-  ;
-};
 
 
 export default Home;

@@ -4,7 +4,7 @@ import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 
 import { TiDeleteOutline } from 'react-icons/ti';
 import toast from 'react-hot-toast';
 
-import { useStateContext } from '../../context/StateContext';
+import { useStateContext } from '../context/StateContext';
 
 const Cart = () => {
   const cartRef =  useRef<HTMLDivElement>(null);

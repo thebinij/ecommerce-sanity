@@ -5,28 +5,41 @@ import {
   AiFillStar,
   AiOutlineStar,
 } from "react-icons/ai";
-import Product from "@/app/components/Product";
-import { client } from "@/lib/client";
+import Product from "@/components/Product";
 import Image from "next/image";
-import { ProductType } from "@/lib/types";
+import {
+  getProduct,
+  getProducts,
+  urlForImage,
+} from "../../../../sanity/sanity-utils";
 
-const ProductDetails = async ({
-  params: { slug },
-}: {
+type Props = {
   params: { slug: string };
-}) => {
-  const { products, product } = await fetchProducts(slug);
-  const { image, name, details, price } = product;
-  const qty = 0;
+};
+
+const ProductDetails = async ({ params: { slug } }: Props) => {
+  const products = await getProducts();
+  const product = await getProduct(slug);
+  const imageProps = urlForImage(product?.image && product.image[0]);
   
+  let index = 0;
+  const setIndex = (newValue: React.Key) => {
+    index = newValue as number;
+  };
+
+  const qty = 0;
+
+   
   return (
     <div>
       <div className="product-detail-container">
-        <div className="sm:w-[30%]">
+        <div className="md:w-[30%]">
           <div className="image-container">
             <Image
               src={
-                "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                imageProps
+                  ? imageProps.url()
+                  : "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
               }
               alt="image"
               width={600}
@@ -35,37 +48,27 @@ const ProductDetails = async ({
             />
           </div>
           <div className="small-images-container">
-            {/* {image?.map((item: any, i: string | number | ((prevState: number) => number) | null | undefined) => (
-              <img 
+            {product.image?.map((item: any, i: React.Key | null | undefined) => (
+              <Image
                 key={i}
-                src={urlFor(item)}
-                className={i === index ? 'small-image selected-image' : 'small-image'}
-                onMouseEnter={() => setIndex(i)}
+                src={
+                  urlForImage(product?.image && product.image[i as number])
+                    ? urlForImage(product.image[i as number]).url()
+                    : "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                }
+                alt="image"
+                width={600}
+                height={600}
+                className={
+                  i === index ? "small-image selected-image" : "small-image"
+                }
               />
-            ))} */}
-            <Image
-              src={
-                "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-              }
-              alt="image"
-              width={100}
-              height={100}
-              className="small-image selected-image"
-            />
-            <Image
-              src={
-                "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-              }
-              alt="image"
-              width={100}
-              height={100}
-              className="small-image"
-            />
+            ))}
           </div>
         </div>
 
-        <div className="product-detail-desc sm:w-[70%] ">
-          <h1>{name}</h1>
+        <div className="product-detail-desc md:w-[70%] ">
+          <h1>{product.name}</h1>
           <div className="reviews">
             <div className="flex">
               <AiFillStar />
@@ -77,8 +80,8 @@ const ProductDetails = async ({
             <p>(20)</p>
           </div>
           <h4>Details: </h4>
-          <p>{details}</p>
-          <p className="price">${price}</p>
+          <p>{product.details}</p>
+          <p className="price">${product.price}</p>
           <div className="quantity">
             <h3>Quantity:</h3>
             <p className="flex items-center justify-center quantity-desc">
@@ -116,41 +119,26 @@ const ProductDetails = async ({
   );
 };
 
-const getStaticPaths = async () => {
-  const query = `*[_type == "product"] {
-    slug {
-      current
-    }
-  }
-  `;
-
-  const products = await client.fetch(query);
-
-  const paths = products.map((product: ProductType) => ({
-    params: {
-      slug: product.slug.current,
-    },
-  }));
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
-};
-
- const fetchProducts = async (slug: string) => {
-  const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
-  const productsQuery = '*[_type == "product"]';
-
-  const product = await client.fetch(query, { next: { revalidate: 3600 } });
-  const products = await client.fetch(productsQuery, {
-    next: { revalidate: 3600 },
-  });
-
-  return {
-    products,
-    product,
-  };
-};
-
 export default ProductDetails;
+
+// const getStaticPaths = async () => {
+//   const query = `*[_type == "product"] {
+//     slug {
+//       current
+//     }
+//   }
+//   `;
+
+//   const products = await client.fetch(query);
+
+//   const paths = products.map((product: ProductType) => ({
+//     params: {
+//       slug: product.slug.current,
+//     },
+//   }));
+
+//   return {
+//     paths,
+//     fallback: "blocking",
+//   };
+// };

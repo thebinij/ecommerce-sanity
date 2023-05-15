@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { GetImageProps } from "@/lib/client";
+import { urlForImage } from "../../sanity/sanity-utils";
 
 const Product = ({ product: { image, name, slug, price } }: any) => {
-  const imageProps = GetImageProps(image && image[0]);
+  const imageProps =   urlForImage(image && image[0]);
   return (
     <div>
       <Link href={`/product/${slug.current}`}>
@@ -12,7 +12,7 @@ const Product = ({ product: { image, name, slug, price } }: any) => {
           <Image
             src={
               imageProps
-                ? imageProps.src
+                ? imageProps.url()
                 : "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
             }
             alt="image"
