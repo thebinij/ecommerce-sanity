@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { urlForImage } from "../../../sanity/sanity-utils";
 
 const HeroBanner = ({
   heroBanner: {
@@ -15,7 +14,6 @@ const HeroBanner = ({
   },
 }: any) => {
 
-  const imageProps =   urlForImage(image && image);
   return (
     <div className="hero-banner-container">
       <div>
@@ -25,8 +23,8 @@ const HeroBanner = ({
         <div >
           <Image
             src={
-              imageProps
-                ? imageProps.url()
+              image
+                ? image[0]
                 : "https://cdn.sanity.io/images/djjgyefp/production/bbe69c7b31d3721ac2dcda06ea9f54d81cdb20e0-1171x781.jpg"
             }
             alt="image"

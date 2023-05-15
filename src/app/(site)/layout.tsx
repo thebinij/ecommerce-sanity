@@ -4,7 +4,7 @@ import { getPages } from "../../../sanity/sanity-utils";
 import { Inter } from "next/font/google";
 import React from "react";
 import Link from "next/link";
-import Logo from "../components/Logo";
+import Logo from "../../components/Logo";
 // import SearchBar from "../components/SearchBar-Client";
 const inter = Inter({ subsets: ["latin"] });
 

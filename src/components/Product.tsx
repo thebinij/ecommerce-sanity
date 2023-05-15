@@ -1,18 +1,17 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { urlForImage } from "../../../sanity/sanity-utils";
+import { ProductType } from "@/lib/types";
 
-const Product = ({ product: { image, name, slug, price } }: any) => {
-  const imageProps =   urlForImage(image && image[0]);
+const Product = ({ product: { image, name, slug, price } }: {product:Partial<ProductType>}) => {
   return (
     <div>
-      <Link href={`/product/${slug.current}`}>
+      <Link href={`/product/${slug}`}>
         <div className="product-card">
           <Image
             src={
-              imageProps
-                ? imageProps.url()
+              image
+                ? image[0]
                 : "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
             }
             alt="image"

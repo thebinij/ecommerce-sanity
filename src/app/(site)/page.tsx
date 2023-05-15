@@ -1,10 +1,9 @@
 import { Key } from "react";
-import Product from "@/app/components/Product";
+import Product from "@/components/Product";
 import {  getProducts } from "../../../sanity/sanity-utils";
 
 const Home = async() => {
   const products = await getProducts()
-
   return (
     <main>
       {/* <HeroBanner heroBanner={banner.length && banner[0]}  /> */}
@@ -14,7 +13,7 @@ const Home = async() => {
         <p>There are many handiCraft products</p>
       </div>
       <div className="products-container">
-        {products.map((product: { _id: Key | null | undefined }) => (
+        {products.map((product) => (
           <Product key={product._id} product={product} />
         ))}
       </div>
